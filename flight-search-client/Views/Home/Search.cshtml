@@ -1,0 +1,44 @@
+﻿@model Nintex.Flight.Client.Models.SearchViewModel
+
+@{
+    ViewData["Title"] = "Flight Search";
+}
+
+<form asp-controller="Home" asp-action="Search" method="post" class="form-horizontal" role="form">
+    <h4>Search for a flight.</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="DepartureAirportCode" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="DepartureAirportCode" class="form-control" />
+            <span asp-validation-for="DepartureAirportCode" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ArrivalAirportCode" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="ArrivalAirportCode" class="form-control" />
+            <span asp-validation-for="ArrivalAirportCode" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartureDate" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="DepartureDate" class="form-control" type="date"/>
+            <span asp-validation-for="DepartureDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ReturnDate" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="ReturnDate" class="form-control" type="date"/>
+            <span asp-validation-for="ReturnDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Search" />
+        </div>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+﻿@model Nintex.Flight.Client.Models.SearchResultViewModel
+@{
+    ViewData["Title"] = "Flight Search Result";
+}
+
+
+<h3>@ViewData["Title"]</h3>
+
+<table class="table">
+    <tbody>
+        @foreach (var flight in Model.FlightEntries)
+        {
+            <tr>
+                <td>@flight.AirlineLogoUrl</td>
+                <td>@flight.AirlineName</td>
+                <td>@flight.InBoundDuration</td>
+                <td>@flight.OutBoundDuration</td>
+                <td>@flight.TotalAmount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="form-group">
+    <div>
+        <input type="button" onclick="window.history.back();" value="Back to Search" />
+    </div>
+</div>
