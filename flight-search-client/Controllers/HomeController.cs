@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nintex.Flight.Client.Models;
 using Nintex.Flight.Api.Models;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Nintex.Flight.Client.Controllers
 {
@@ -35,12 +38,23 @@ namespace Nintex.Flight.Client.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(SearchViewModel model)
+        public async Task<IActionResult> Search(SearchViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var result = new List<FlightEntry>();
-                result.Add(new FlightEntry() { AirlineLogoUrl = "URL", AirlineName = "AirLine1", InBoundDuration = 40, OutBoundDuration = 60, TotalAmount = 100.99 });
+
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage response = await client.GetAsync(new Uri("http://localhost:9439/api/flight"));
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = JsonConvert.DeserializeObject<List<FlightEntry>>(response.Content.ReadAsStringAsync().Result);
+                    }
+                }
 
                 return View("SearchResult", new SearchResultViewModel() { FlightEntries = result });
             }

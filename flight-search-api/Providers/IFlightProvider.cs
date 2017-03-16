@@ -10,6 +10,6 @@ namespace Nintex.Flight.Api
     {
         string ProviderURL { get; }
 
-        List<FlightEntry> GetFlights(string result);
+        Task<List<FlightEntry>> GetFlights(string result);
     }
 }

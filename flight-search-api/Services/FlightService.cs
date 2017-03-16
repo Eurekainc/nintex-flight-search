@@ -22,11 +22,22 @@ namespace Nintex.Flight.Api
         {
             var result = new List<FlightEntry>();
 
-            foreach (var provider in this.flightProviders)
-            {
-                result.AddRange(this.GetFlights(provider).Result);
-            }
-            
+            await Task.WhenAll(this.flightProviders.Select(async f => result.AddRange(await this.GetFlights(f))));
+
+            //List<Task<List<FlightEntry>>> TaskList = new List<Task<List<FlightEntry>>>();
+
+            //foreach(var provider in this.flightProviders)
+            //{
+            //    var lastTask = this.GetFlights(provider);
+            //    TaskList.Add(lastTask);
+            //}
+
+            //var resultArray = await Task.WhenAll(TaskList);
+
+            //foreach (var arrayOfFlight in resultArray)
+            //{
+            //    result.AddRange(arrayOfFlight);
+            //}
 
             return result;
         }
@@ -36,14 +47,14 @@ namespace Nintex.Flight.Api
             var result = new List<FlightEntry>();
             using (var client = new HttpClient())
             {
-                //client.BaseAddress = new Uri("http://nmflightapi.azurewebsites.net/api/AirlineOne");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = await client.GetAsync(new Uri(provider.ProviderURL));
+
                 if (response.IsSuccessStatusCode)
                 {
-                    result = provider.GetFlights(response.Content.ReadAsStringAsync().Result);
+                    result = await provider.GetFlights(await response.Content.ReadAsStringAsync());
                 }
             }
 

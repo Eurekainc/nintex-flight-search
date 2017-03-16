@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Nintex.Flight.Api
 {
@@ -13,10 +10,11 @@ namespace Nintex.Flight.Api
         {
             if(flightService == null)
             {
-                var providers = new List<IFlightProvider>();
-
-                providers.Add(new FlightProviderOne());
-                providers.Add(new FlightProviderTwo());
+                var providers = new List<IFlightProvider>
+                {
+                    new FlightProviderOne(),
+                    new FlightProviderTwo()
+                };
 
                 flightService = new FlightService(providers);
             }

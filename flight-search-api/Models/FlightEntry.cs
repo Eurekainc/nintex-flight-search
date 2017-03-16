@@ -2,10 +2,10 @@
 {
     public class FlightEntry
     {
-        public string AirlineLogoUrl { get; set; }
+        public string AirlineLogoAddress { get; set; }
         public string AirlineName { get; set; }
-        public int InBoundDuration { get; set; }
-        public int OutBoundDuration { get; set; }
+        public string InboundFlightsDuration { get; set; }
+        public string OutBoundFlightsDuration { get; set; }
         public double TotalAmount { get; set; }
     }
 }

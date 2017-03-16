@@ -11,10 +11,10 @@
         @foreach (var flight in Model.FlightEntries)
         {
             <tr>
-                <td>@flight.AirlineLogoUrl</td>
+                <td><img src="@flight.AirlineLogoAddress" /></td>
                 <td>@flight.AirlineName</td>
-                <td>@flight.InBoundDuration</td>
-                <td>@flight.OutBoundDuration</td>
+                <td>@flight.InboundFlightsDuration</td>
+                <td>@flight.OutBoundFlightsDuration</td>
                 <td>@flight.TotalAmount</td>
             </tr>
         }

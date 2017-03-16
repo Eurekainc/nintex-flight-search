@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using Nintex.Flight.Api.Models;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Nintex.Flight.Api
 {
@@ -17,7 +15,7 @@ namespace Nintex.Flight.Api
             }
         }
 
-        public List<FlightEntry> GetFlights(string result)
+        public async Task<List<FlightEntry>> GetFlights(string result)
         {
             return JsonConvert.DeserializeObject<List<FlightEntry>>(result);
         }

@@ -17,8 +17,10 @@ namespace Nintex.Flight.Api
             }
         }
 
-        public List<FlightEntry> GetFlights(string result)
+        public async Task<List<FlightEntry>> GetFlights(string result)
         {
+            await Task.Delay(10000).ConfigureAwait(false);
+
             var flightResult = JsonConvert.DeserializeObject<AirLineTwoResult>(result);
 
             return flightResult.Results;
